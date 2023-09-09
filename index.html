@@ -4,20 +4,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Personal Budget</title>
+
+    <!-- This is an SEO Change -->
+    <meta name="keywords" content="personal budgeting money finance">
+    <!-- This is an SEO Change -->
+    <meta name="description" content="A Personal budget informationl website">
+    
     <link rel="stylesheet" href="./reset.css">
     <link rel="stylesheet" href="./main.css">
 </head>
 <body>
 
+    <!-- This is an A11y Change -->
+    <a href="#main" class="skipto">Skip to main content</a>
+
     <!-- This is a Semantic HTML Change -->
     <nav class="menu">
         <ul>
-            <li><a href="./">Homepage</a></li>
-            <li><a href="./about.html">About</a></li>
-            <li><a href="./login.html">Login</a></li>
-            <li><a href="https://google.com">Google</a></li>
+            <!-- This is an A11y Change  tabindex-->
+            <li><a href="./" tabindex="1">Homepage</a></li>
+            <li><a href="./about.html" tabindex="2">About</a></li>
+            <!-- This is an SEO Change -->
+            <li><a href="./login.html" rel="nofollow" tabindex="3">Login</a></li>
+            <li><a href="https://google.com" rel="nofollow" tabindex="4">Google</a></li>
         </ul>
     </nav>
+
+    
 
     <!-- This is a Semantic HTML Change -->
     <section class="hero">
@@ -25,7 +38,8 @@
         <h2>A personal-budget management app</h2>
     </section>
 
-    <div class="container center">
+    <!-- This is an A11y Change -->
+    <main class="container center">
 
         <div class="page-area">
 
@@ -96,7 +110,7 @@
 
         </div>
 
-    </div>
+    </main>
 
     <div class="bottom">
         <div class="center">
