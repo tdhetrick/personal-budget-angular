@@ -125,46 +125,47 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
 <script>
 
-        const colors = ['#FF6384', '#36A2EB', '#FFCE56'];
-        var data;
-        var labels;
+    const colors = ["#FF5733", "#FFC133", "#DBFF33", "#4CFF33", "#33FF99", "#33C6FF", "#9933FF"];
 
-    
-        axios.get('./budget')
-            .then(function(response) {
-                console.log(response);
-                labels = response.data.theBudget.map(item => item.title);
-                data = response.data.theBudget.map(item => item.budget);
+    var data;
+    var labels;
 
-                bchart();  
-                
-            })
-            .catch(function(error) {
-                console.log('Error fetching the data', error);
-            });
 
-        console.log(data)    ;
-        function bchart(){    
-            var ctx = document.getElementById('budgetChart').getContext('2d');
-                var myDoughnutChart = new Chart(ctx, {
-                    type: 'doughnut',
-                    data: {
-                        labels: labels,
-                        datasets: [{
-                            data: data,
-                            borderWidth: 1,
-                            backgroundColor: colors
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        
-                        legend: {
-                            display: true
-                        }
+    axios.get('./budget')
+        .then(function(response) {
+            console.log(response);
+            labels = response.data.theBudget.map(item => item.title);
+            data = response.data.theBudget.map(item => item.budget);
+
+            bchart();  
+            
+        })
+        .catch(function(error) {
+            console.log('Error fetching the data', error);
+        });
+
+    console.log(data)    ;
+    function bchart(){    
+        var ctx = document.getElementById('budgetChart').getContext('2d');
+            var myDoughnutChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        data: data,
+                        borderWidth: 1,
+                        backgroundColor: colors
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    
+                    legend: {
+                        display: true
                     }
-                });
-            }
+                }
+            });
+        }
 
           
     </script>

@@ -1,0 +1,32 @@
+{
+    "theBudget": [
+        {
+            "title": "Eating out",
+            "budget": 250
+        },
+        {
+           "title": "Rent",
+            "budget": 2750
+        },
+        {
+            "title": "Grocery",
+            "budget": 500
+        },
+        {
+            "title": "Utilities",
+            "budget": 200
+        },
+        {
+            "title": "Medical",
+            "budget": 325
+        },
+        {
+            "title": "Pet Care",
+            "budget": 100
+        },
+        {
+            "title": "Entertainment",
+            "budget": 200
+        }
+    ]
+}

@@ -1,4 +1,5 @@
 const express = require('express');
+const path = require('path');
 const app = express();
 const port = 3000;
 
@@ -26,8 +27,11 @@ app.get('/hello',(req,res) => {
 });
 
 app.get('/budget',(req,res) => {
-    res.json(budget);
+   // res.json(budget);
+   res.sendFile(path.join(__dirname, 'budget.json'));
 });
+
+
 
 app.listen(port, () => {
     console.log(`Server listening on port${port}`);
