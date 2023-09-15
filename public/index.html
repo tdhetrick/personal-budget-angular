@@ -108,15 +108,65 @@
                 </p>
             </article>
 
+            <h1>My Budget</h1>
+            <canvas id="budgetChart"></canvas>
+
+
         </div>
 
     </main>
 
     <div class="bottom">
         <div class="center">
-            All rights reserved &copy; Fabio Nolasco
+            All rights reserved &copy; Todd Hetrick
         </div>
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.5.0/axios.min.js" integrity="sha512-aoTNnqZcT8B4AmeCFmiSnDlc4Nj/KPaZyB5G7JnOnUEkdNpCZs1LCankiYi01sLTyWy+m2P+W4XM+BuQ3Q4/Dg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
+<script>
 
+        const colors = ['#FF6384', '#36A2EB', '#FFCE56'];
+        var data;
+        var labels;
+
+    
+        axios.get('./budget')
+            .then(function(response) {
+                console.log(response);
+                labels = response.data.theBudget.map(item => item.title);
+                data = response.data.theBudget.map(item => item.budget);
+
+                bchart();  
+                
+            })
+            .catch(function(error) {
+                console.log('Error fetching the data', error);
+            });
+
+        console.log(data)    ;
+        function bchart(){    
+            var ctx = document.getElementById('budgetChart').getContext('2d');
+                var myDoughnutChart = new Chart(ctx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            data: data,
+                            borderWidth: 1,
+                            backgroundColor: colors
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        
+                        legend: {
+                            display: true
+                        }
+                    }
+                });
+            }
+
+          
+    </script>
 </body>
 </html>
