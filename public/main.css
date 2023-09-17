@@ -108,3 +108,8 @@ section.hero h2 {
     height: 1px;
     overflow: hidden;
   }
+
+  .d3container {
+    margin-top:50px;
+
+  }

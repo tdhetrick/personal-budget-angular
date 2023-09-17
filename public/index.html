@@ -13,6 +13,25 @@
     <link rel="stylesheet" href="./reset.css">
     <link rel="stylesheet" href="./main.css">
 </head>
+<style>
+    svg {
+       
+        width: 960px;
+        height: 500px;
+    }
+    
+    path.slice{
+        stroke-width:2px;
+    }
+    
+    polyline{
+        opacity: .3;
+        stroke: black;
+        stroke-width: 2px;
+        fill: none;
+    }
+    
+    </style>
 <body>
 
     <!-- This is an A11y Change -->
@@ -111,10 +130,20 @@
             <h1>My Budget</h1>
             <canvas id="budgetChart"></canvas>
 
+           
+            
 
         </div>
 
+        <div class="d3container">
+            <h1>D3 Budget</h1>
+            <div id="d3Chart"></div>
+        </div>
+
+
     </main>
+
+
 
     <div class="bottom">
         <div class="center">
@@ -123,36 +152,46 @@
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.5.0/axios.min.js" integrity="sha512-aoTNnqZcT8B4AmeCFmiSnDlc4Nj/KPaZyB5G7JnOnUEkdNpCZs1LCankiYi01sLTyWy+m2P+W4XM+BuQ3Q4/Dg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
+    <script src="http://d3js.org/d3.v3.min.js"></script>
 <script>
 
     const colors = ["#FF5733", "#FFC133", "#DBFF33", "#4CFF33", "#33FF99", "#33C6FF", "#9933FF"];
 
-    var data;
-    var labels;
+    var chartdata;
+    var chartlabels;
 
 
     axios.get('./budget')
         .then(function(response) {
-            console.log(response);
-            labels = response.data.theBudget.map(item => item.title);
-            data = response.data.theBudget.map(item => item.budget);
+            //console.log(response);
+            chartlabels = response.data.theBudget.map(item => item.title);
+            chartdata = response.data.theBudget.map(item => item.budget);
 
-            bchart();  
+            bchart();
+
+            d3data = chartlabels.map(function(label, index){
+                    return {
+                        label: label,
+                        value: chartdata[index]
+                    }
+                }
+            );
+            d3Update(d3data)  
             
         })
         .catch(function(error) {
             console.log('Error fetching the data', error);
         });
 
-    console.log(data)    ;
+   
     function bchart(){    
         var ctx = document.getElementById('budgetChart').getContext('2d');
             var myDoughnutChart = new Chart(ctx, {
                 type: 'doughnut',
                 data: {
-                    labels: labels,
+                    labels: chartlabels,
                     datasets: [{
-                        data: data,
+                        data: chartdata,
                         borderWidth: 1,
                         backgroundColor: colors
                     }]
@@ -169,5 +208,6 @@
 
           
     </script>
+    <script  type="application/javascript"  src="./d3chart.js"></script>
 </body>
 </html>
