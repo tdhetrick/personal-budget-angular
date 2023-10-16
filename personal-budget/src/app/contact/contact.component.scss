@@ -1,0 +1,43 @@
+.contact-form {
+    background-color: #f8f8f8; 
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    margin-top: 20px;
+    margin: 20px auto; 
+    width: 30%; 
+}
+
+.contact-form label {
+    display: block;
+    font-size: 1.2em;
+    margin-bottom: 5px;
+    color: #4d5791; 
+}
+
+.contact-form input[type="text"],
+.contact-form input[type="email"],
+.contact-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #b4c6f0; 
+    border-radius: 5px;
+    font-size: 1em;
+    font-family: Tahoma, Arial;
+}
+
+.contact-form input[type="submit"] {
+    background-color: #4d5791; 
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.contact-form input[type="submit"]:hover {
+    background-color: #3a456e; 
+}
+

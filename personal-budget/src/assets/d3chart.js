@@ -1,4 +1,3 @@
-console.log("d3 start");
 var svg = d3.select("#d3Chart")
 	.append("svg")
 	.append("g")

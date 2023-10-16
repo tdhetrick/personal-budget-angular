@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { Chart, registerables } from 'chart.js';
-
+import { DataService } from '../data.service';
 
 
 Chart.register(...registerables)
@@ -11,33 +10,25 @@ Chart.register(...registerables)
   templateUrl: './homepage.component.html',
   styleUrls: ['./homepage.component.scss']
 })
+
 export class HomepageComponent implements OnInit {
 
-  public colors = ["#FF5733", "#FFC133", "#DBFF33", "#4CFF33", "#33FF99", "#33C6FF", "#9933FF"];
-  public chartdata =[];
-  public chartlabels =[];
+  constructor(private dataServices:DataService){  }
 
-  
-
-  constructor(private http: HttpClient){
-   
-
-  }
   ngOnInit(): void {
 
-    this.http.get('http://localhost:3000/budget').subscribe((response: any) => {
-
-    console.log(response)
-
-      this.chartlabels = response.theBudget.map((item: { title: any; }) => item.title);
-      this.chartdata = response.theBudget.map((item: { budget: any; }) => item.budget);
-
-      this.bchart();
-
-    });
+    if (this.dataServices.chartdata.length == 0){
+      this.dataServices.fetchData().subscribe(() => {
+        console.log(this.dataServices.chartdata);
+        this.bchart(this.dataServices.colors, this.dataServices.chartdata, this.dataServices.chartlabels);
+      });
+    }else{
+      this.bchart(this.dataServices.colors, this.dataServices.chartdata, this.dataServices.chartlabels);
+    }
+    
   }
 
-  bchart(){    
+  bchart(colors: any, chartdata: any, chartlabels: any){    
     let canvas = document.getElementById('budgetChart') as HTMLCanvasElement;
     if (canvas) {
         let ctx = canvas.getContext('2d');
@@ -45,11 +36,11 @@ export class HomepageComponent implements OnInit {
             var myDoughnutChart = new Chart(ctx, {
                 type: 'doughnut',
                 data: {
-                    labels: this.chartlabels,
+                    labels: chartlabels,
                     datasets: [{
-                        data: this.chartdata,
+                        data: chartdata,
                         borderWidth: 1,
-                        backgroundColor: this.colors
+                        backgroundColor: colors
                     }]
                 },
                 options: {
@@ -69,7 +60,5 @@ export class HomepageComponent implements OnInit {
         console.error('Failed to get element');
     }
 }
-
-    
 
 }
